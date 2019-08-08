@@ -1,0 +1,7 @@
+# personal settings
+.DS_Store
+.idea
+
+
+# Maven related files
+/target/
