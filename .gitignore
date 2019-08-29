@@ -1,7 +1,9 @@
 # personal settings
 .DS_Store
-.idea
 
+# Intellij
+.idea
+*.iml
 
 # Maven related files
 /target/
