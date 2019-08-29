@@ -2,7 +2,8 @@
 .DS_Store
 
 # Intellij
-.idea
+.idea/*
+!.idea/runConfigurations/
 *.iml
 
 # Maven related files
