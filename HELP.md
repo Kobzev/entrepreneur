@@ -26,4 +26,4 @@ docker-compose up -d
 
 cleanup DB:
 docker-compose stop
-docker rm $(docker ps -a -q)
+docker rm entrepreneur_db_1
