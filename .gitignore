@@ -6,5 +6,10 @@
 !.idea/runConfigurations/
 *.iml
 
+# Eclipse
+/.settings/
+.classpath
+.project
+
 # Maven related files
 /target/
