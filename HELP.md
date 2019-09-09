@@ -23,3 +23,7 @@ The following guides illustrate how to use some features concretely:
 # How to run local DB
 From root folder run:
 docker-compose up -d
+
+cleanup DB:
+docker-compose stop
+docker rm $(docker ps -a -q)
