@@ -16,10 +16,10 @@
             <column name="base_currency" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="buy_price" type="DOUBLE">
+            <column name="buy_price" type="DECIMAL(10,5)">
                 <constraints nullable="false"/>
             </column>
-            <column name="sale_price" type="DOUBLE">
+            <column name="sale_price" type="DECIMAL(10,5)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

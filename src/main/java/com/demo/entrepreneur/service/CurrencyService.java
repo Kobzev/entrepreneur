@@ -4,7 +4,6 @@ import com.demo.entrepreneur.model.dto.ExchangeRateDto;
 import com.demo.entrepreneur.model.entity.ExchangeRate;
 import com.demo.entrepreneur.model.mapping.ExchangeRateMapper;
 import com.demo.entrepreneur.model.repository.ExchangeRateRepository;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,32 +17,32 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class CurrencyClient {
+public class CurrencyService {
 
-    private final Logger log = LoggerFactory.getLogger(CurrencyClient.class);
+    private final Logger log = LoggerFactory.getLogger(CurrencyService.class);
+
     @Value("${exchangeRate.api.url}")
     private String apiUrl;
     private ExchangeRateRepository rateRepository;
     private ExchangeRateMapper rateMapper;
+    private RestTemplate restTemplate;
 
     @Autowired
-    public CurrencyClient(ExchangeRateRepository rateRepository, ExchangeRateMapper rateMapper) {
+    public CurrencyService(ExchangeRateRepository rateRepository, ExchangeRateMapper rateMapper, RestTemplate restTemplate) {
         this.rateRepository = rateRepository;
         this.rateMapper = rateMapper;
+        this.restTemplate = restTemplate;
     }
 
-    public List<ExchangeRate> getUpdatedExchangeRatesAndSave() {
+    public void getUpdatedExchangeRatesAndSave() {
         log.info("Call currency api({}) to update currency.", apiUrl);
 
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<ExchangeRateDto[]> responseEntity = restTemplate.getForEntity(apiUrl, ExchangeRateDto[].class);
         ExchangeRateDto[] rates = responseEntity.getBody();
-
-        List<ExchangeRate> exchangeRates = Stream.of(rates).map(rateMapper::DtoToCurrency).collect(Collectors.toList());
-
+        List<ExchangeRate> exchangeRates = Stream.of(rates).map(rateMapper::dtoToCurrency)
+                .collect(Collectors.toList());
         rateRepository.saveAll(exchangeRates);
-        Stream.of(rates).forEach(rateDto -> log.info(rateDto.toString()));
 
-        return exchangeRates;
+        Stream.of(rates).forEach(rateDto -> log.info(rateDto.toString()));
     }
 }

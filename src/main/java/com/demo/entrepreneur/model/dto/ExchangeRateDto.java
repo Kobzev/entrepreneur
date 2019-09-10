@@ -15,8 +15,8 @@ public class ExchangeRateDto {
     @JsonProperty("base_ccy")
     private String baseCurrency;
     @JsonProperty("buy")
-    private Double buyPrice;
+    private String buyPrice;
     @JsonProperty("sale")
-    private Double salePrice;
+    private String salePrice;
 
 }

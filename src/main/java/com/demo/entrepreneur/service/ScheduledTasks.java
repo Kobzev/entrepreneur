@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class ScheduledTasks {
-    private CurrencyClient apiClient;
+
+    private CurrencyService apiClient;
 
     @Scheduled(cron = "${cron.template.exchangeRate}")
     public void rateUpdateTask() {
