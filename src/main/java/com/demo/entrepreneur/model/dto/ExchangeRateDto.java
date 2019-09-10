@@ -1,11 +1,14 @@
-package com.demo.entrepreneur.model.entity;
+package com.demo.entrepreneur.model.dto;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
-public class Currency {
+@Accessors(chain = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ExchangeRateDto {
 
     @JsonProperty("ccy")
     private String currentCurrency;
