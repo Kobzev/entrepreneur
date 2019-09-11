@@ -1,20 +1,19 @@
-package com.demo.entrepreneur.entity;
+package com.demo.entrepreneur.dto;
 
 import lombok.*;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
-public class User {
+
+public class UserDTO {
+
     private int id;
     private String login;
     private String password;
     private String firstName;
     private String lastName;
-    private String role;
 
 
 }
