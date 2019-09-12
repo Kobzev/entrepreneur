@@ -2,8 +2,9 @@ package com.demo.entrepreneur.dto;
 
 import lombok.*;
 
-
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 
