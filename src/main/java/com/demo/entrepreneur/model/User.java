@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.entity;
+package com.demo.entrepreneur.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +13,7 @@ public class User {
     private Long id;
     private String login;
     private String password;
+    private String email;
     private String firstName;
     private String lastName;
 

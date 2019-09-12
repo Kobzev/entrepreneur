@@ -4,9 +4,9 @@
         xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-
-
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
     <changeSet id="20190912110001" author="VladRybkin">
 
         <createTable tableName="user">
@@ -18,7 +18,7 @@
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="email" type="varchar(40)">
+            <column name="email" type="varchar(30)">
                 <constraints nullable="false" unique="true"/>
             </column>
 
@@ -26,9 +26,9 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="lastname" type="varchar(40)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="firstname" type="varchar(30)"/>
+
+            <column name="lastname" type="varchar(30)"/>
 
             <column name="activatestatus" type="varchar(20)">
                 <constraints nullable="false"/>
@@ -39,3 +39,4 @@
     </changeSet>
 
 </databaseChangeLog>
+
