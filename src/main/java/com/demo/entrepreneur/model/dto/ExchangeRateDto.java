@@ -18,5 +18,4 @@ public class ExchangeRateDto {
     private String buyPrice;
     @JsonProperty("sale")
     private String salePrice;
-
 }

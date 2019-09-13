@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class ScheduledTasks {
+public class CurrencyRateUpdateService {
 
     private CurrencyService currencyService;
 
@@ -15,5 +15,4 @@ public class ScheduledTasks {
     public void updateRates() {
         currencyService.getUpdatedExchangeRates();
     }
-
 }

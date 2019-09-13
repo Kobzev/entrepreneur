@@ -24,5 +24,4 @@ public class ExchangeRate {
     private Currency baseCurrency;
     private BigDecimal buyPrice;
     private BigDecimal salePrice;
-
 }

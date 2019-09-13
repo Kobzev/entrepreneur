@@ -25,5 +25,4 @@ public class ExchangeRateMapper {
                 .setSalePrice(new BigDecimal(dto.getSalePrice()))
                 .setBuyPrice(new BigDecimal(dto.getBuyPrice()));
     }
-
 }
