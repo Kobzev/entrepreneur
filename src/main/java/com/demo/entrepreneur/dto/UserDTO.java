@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +21,4 @@ public class UserDTO {
     private String firstName;
     @JsonProperty("lastName")
     private String lastName;
-
-
 }

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +27,4 @@ public class User {
     private String firstName;
     @Column(name = "lastname")
     private String lastName;
-
-
 }
