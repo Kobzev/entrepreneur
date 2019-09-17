@@ -41,10 +41,12 @@ class CurrencyServiceTest {
 
     @BeforeEach
     void setUp() {
-        exchangeRateDto = new ExchangeRateDto().setBaseCurrency(BASE_CURRENCY.name())
-                .setCurrentCurrency(CURRENT_CURRENCY.name())
-                .setBuyPrice(BUY_PRICE.toPlainString())
-                .setSalePrice(SALE_PRICE.toPlainString());
+        exchangeRateDto = ExchangeRateDto.builder()
+                .baseCurrency(BASE_CURRENCY.name())
+                .currentCurrency(CURRENT_CURRENCY.name())
+                .buyPrice(BUY_PRICE.toPlainString())
+                .salePrice(SALE_PRICE.toPlainString())
+                .build();
         ReflectionTestUtils.setField(service, "apiUrl", API_URL);
     }
 

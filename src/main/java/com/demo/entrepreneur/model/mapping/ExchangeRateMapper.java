@@ -12,17 +12,23 @@ import java.math.BigInteger;
 public class ExchangeRateMapper {
 
     public ExchangeRateDto currencyToDto(ExchangeRate exchangeRate) {
-        return new ExchangeRateDto().setCurrentCurrency(exchangeRate.getCurrentCurrency().name())
-                .setBaseCurrency(exchangeRate.getBaseCurrency().name())
-                .setSalePrice(exchangeRate.getSalePrice().toPlainString())
-                .setBuyPrice(exchangeRate.getBuyPrice().toPlainString());
+        return ExchangeRateDto.builder()
+                .currentCurrency(exchangeRate.getCurrentCurrency().name())
+                .baseCurrency(exchangeRate.getBaseCurrency().name())
+                .salePrice(exchangeRate.getSalePrice().toPlainString())
+                .buyPrice(exchangeRate.getBuyPrice().toPlainString())
+                .date(exchangeRate.getDate())
+                .build();
     }
 
     public ExchangeRate dtoToCurrency(ExchangeRateDto dto) {
-        return new ExchangeRate().setId(BigInteger.ZERO)
-                .setCurrentCurrency(Currency.valueOf(dto.getCurrentCurrency()))
-                .setBaseCurrency(Currency.valueOf(dto.getBaseCurrency()))
-                .setSalePrice(new BigDecimal(dto.getSalePrice()))
-                .setBuyPrice(new BigDecimal(dto.getBuyPrice()));
+        return ExchangeRate.builder()
+                .id(BigInteger.ZERO)
+                .currentCurrency(Currency.valueOf(dto.getCurrentCurrency()))
+                .baseCurrency(Currency.valueOf(dto.getBaseCurrency()))
+                .salePrice(new BigDecimal(dto.getSalePrice()))
+                .buyPrice(new BigDecimal(dto.getBuyPrice()))
+                .date(dto.getDate())
+                .build();
     }
 }

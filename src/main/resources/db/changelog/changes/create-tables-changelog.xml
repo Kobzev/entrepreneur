@@ -42,4 +42,12 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="20190917113000" author="Andrii_Hurniak@epam.com">
+        <addColumn tableName="exchange_rates">
+            <column name="date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
