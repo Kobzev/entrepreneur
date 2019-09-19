@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CurrencyRateUpdateService {
+public class CurrencyRateUpdateJob {
 
     private CurrencyService currencyService;
 

@@ -1,6 +1,6 @@
-package com.demo.entrepreneur.model.repository;
+package com.demo.entrepreneur.repository;
 
-import com.demo.entrepreneur.model.entity.ExchangeRate;
+import com.demo.entrepreneur.entity.ExchangeRate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;

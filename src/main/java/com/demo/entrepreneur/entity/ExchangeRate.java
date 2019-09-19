@@ -1,7 +1,7 @@
-package com.demo.entrepreneur.model.entity;
+package com.demo.entrepreneur.entity;
 
 
-import com.demo.entrepreneur.model.enumeration.Currency;
+import com.demo.entrepreneur.enumeration.Currency;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

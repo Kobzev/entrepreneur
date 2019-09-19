@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.model.dto;
+package com.demo.entrepreneur.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
