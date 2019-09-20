@@ -8,13 +8,13 @@ import org.springframework.data.repository.RepositoryDefinition;
 import com.demo.entrepreneur.model.User;
 
 @RepositoryDefinition(domainClass = User.class, idClass = Long.class)
-public interface UserDao {
-	
-	User save(User user);
+public interface UserRepository {
 
-	List<User> findAll();
+    User save(User user);
 
-	Optional<User> findByLogin(String login);
+    List<User> findAll();
 
-	void delete(User user);
+    Optional<User> findByLogin(String login);
+
+    void delete(User user);
 }

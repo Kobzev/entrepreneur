@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.demo.entrepreneur.dao.UserDao;
+import com.demo.entrepreneur.dao.UserRepository;
 import com.demo.entrepreneur.dto.UserDto;
 import com.demo.entrepreneur.model.User;
 import com.demo.entrepreneur.model.mapping.mapper.impl.UserMapper;
@@ -24,22 +24,22 @@ public class DefaultUserService implements UserService {
 	private UpdateUserPopulator updateUserPopulator;
 	
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userRepository;
 	
 	@Override
 	public void registerNewUser(UserDto userDto) {
 		User user = userMapper.dataToEntity(userDto);
-		userDao.save(user);
+		userRepository.save(user);
 	}
 
 	@Override
 	public Collection<User> getAllUsers() {
-		return userDao.findAll();
+		return userRepository.findAll();
 	}
 
 	@Override
 	public User getUserByLogin(String login) {
-		return userDao.findByLogin(login).orElseThrow(EntityNotFoundException::new);
+		return userRepository.findByLogin(login).orElseThrow(EntityNotFoundException::new);
 	}
 
 	@Transactional
@@ -52,7 +52,7 @@ public class DefaultUserService implements UserService {
 	@Override
 	public void deleteUserByLogin(String login) {
 		final User user = getUserByLogin(login);
-		userDao.delete(user);
+		userRepository.delete(user);
 	}
 
 }
