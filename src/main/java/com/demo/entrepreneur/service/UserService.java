@@ -7,13 +7,13 @@ import com.demo.entrepreneur.model.User;
 
 public interface UserService {
 
-	void registerNewUser(UserDto user);
+	User registerNewUser(UserDto user);
 
 	Collection<User> getAllUsers();
 
 	User getUserByLogin(String login);
 
-	User updateUserByLogin(UserDto user);
+	User updateUserByLogin(String login, UserDto user);
 
 	void deleteUserByLogin(String login);
 }
