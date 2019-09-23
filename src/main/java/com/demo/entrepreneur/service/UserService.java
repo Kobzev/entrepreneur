@@ -16,4 +16,6 @@ public interface UserService {
 	User updateUserByLogin(String login, UserDto user);
 
 	void deleteUserByLogin(String login);
+
+	void confirmEmail(String token);
 }

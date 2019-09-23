@@ -4,18 +4,11 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.demo.entrepreneur.model.ConfirmationToken;
+import com.demo.entrepreneur.model.repository.ConfirmationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.demo.entrepreneur.dto.PublicUserDto;
 import com.demo.entrepreneur.dto.UserDto;
@@ -56,6 +49,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserByLogin(@PathVariable String login) {
         userService.deleteUserByLogin(login);
+    }
+
+    @GetMapping("/confirm-email")
+    public void confirmUserEmail(@RequestParam String token) {
+        userService.confirmEmail(token);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

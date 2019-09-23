@@ -27,4 +27,6 @@ public class User {
     private String firstName;
     @Column(name = "lastname")
     private String lastName;
+    @Column(name = "is_activated")
+    private boolean isActivated;
 }

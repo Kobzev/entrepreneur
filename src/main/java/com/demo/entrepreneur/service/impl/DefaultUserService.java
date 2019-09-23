@@ -4,6 +4,9 @@ import java.util.Collection;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.demo.entrepreneur.model.ConfirmationToken;
+import com.demo.entrepreneur.model.repository.ConfirmationTokenRepository;
+import com.demo.entrepreneur.service.EmailValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +26,19 @@ public class DefaultUserService implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EmailValidatorService emailValidator;
+
+    @Autowired
+    private ConfirmationTokenRepository confirmationTokenRepository;
+
+
     @Override
     public User registerNewUser(UserDto userDto) {
         final User user = userPopulator.populateDataToEntity(userDto, new User());
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        emailValidator.sendVerificationEmail(user);
+        return savedUser;
     }
 
     @Override
@@ -50,6 +62,18 @@ public class DefaultUserService implements UserService {
     public void deleteUserByLogin(String login) {
         final User user = getUserByLogin(login);
         userRepository.delete(user);
+    }
+
+    public void confirmEmail(String token) {
+        ConfirmationToken confirmationToken = confirmationTokenRepository.findByToken(token);
+
+        if (confirmationToken == null) {
+            throw new RuntimeException("Wrong token!");
+        }
+
+        User user = userRepository.findByEmail(confirmationToken.getUser().getEmail());
+        user.setActivated(true);
+        userRepository.save(user);
     }
 
 }
