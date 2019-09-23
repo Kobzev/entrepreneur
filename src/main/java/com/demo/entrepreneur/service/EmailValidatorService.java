@@ -1,5 +1,6 @@
 package com.demo.entrepreneur.service;
 
+import com.demo.entrepreneur.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
@@ -17,31 +18,20 @@ public class EmailValidatorService {
         this.emailSenderService = emailSenderService;
     }
 
-    public void validateEmail(String email){
-        checkIfEmailIsValid(email);
-
-       /* User user = userService.getUserByEmail(email);
-        if (user != null) {
-            throw new RuntimeException("User with such email already exists");
-        }*/
-
-        sendVerificationEmail(email);
-    }
-
-    private void sendVerificationEmail(String email){
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(email);
-        msg.setSubject("Entrepreneur app");
-        msg.setText("Welcome to entrepreneur app!");
-        emailSenderService.sendEmail(msg);
-    }
-
-    private void checkIfEmailIsValid(String email){
+    public void checkIfEmailIsValid(User user){
         try {
-            InternetAddress emailAddress = new InternetAddress(email);
+            InternetAddress emailAddress = new InternetAddress(user.getEmail());
             emailAddress.validate();
         } catch (AddressException e) {
             throw new RuntimeException("Email address is not valid");
         }
+    }
+
+    public void sendVerificationEmail(User user){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(user.getEmail());
+        msg.setSubject("Entrepreneur app");
+        msg.setText("Welcome to entrepreneur app!");
+        emailSenderService.sendEmail(msg);
     }
 }
