@@ -1,10 +1,10 @@
 package com.demo.entrepreneur.service;
 
-import com.demo.entrepreneur.model.dto.ExchangeRateDto;
-import com.demo.entrepreneur.model.entity.ExchangeRate;
-import com.demo.entrepreneur.model.enumeration.Currency;
-import com.demo.entrepreneur.model.mapping.ExchangeRateMapper;
-import com.demo.entrepreneur.model.repository.ExchangeRateRepository;
+import com.demo.entrepreneur.dto.ExchangeRateDto;
+import com.demo.entrepreneur.entity.ExchangeRate;
+import com.demo.entrepreneur.enumeration.Currency;
+import com.demo.entrepreneur.mapping.ExchangeRateMapper;
+import com.demo.entrepreneur.repository.ExchangeRateRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,10 +25,14 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CurrencyServiceTest {
 
-    @InjectMocks private  CurrencyService service;
-    @Mock private ExchangeRateRepository rateRepository;
-    @Mock private RestTemplate restTemplate;
-    @Spy  private  ExchangeRateMapper rateMapper = new ExchangeRateMapper();
+    @InjectMocks
+    private CurrencyService service;
+    @Mock
+    private ExchangeRateRepository rateRepository;
+    @Mock
+    private RestTemplate restTemplate;
+    @Spy
+    private ExchangeRateMapper rateMapper = new ExchangeRateMapper();
 
     private static final Currency CURRENT_CURRENCY = Currency.USD;
     private static final Currency BASE_CURRENCY = Currency.UAH;
@@ -41,10 +45,12 @@ class CurrencyServiceTest {
 
     @BeforeEach
     void setUp() {
-        exchangeRateDto = new ExchangeRateDto().setBaseCurrency(BASE_CURRENCY.name())
-                .setCurrentCurrency(CURRENT_CURRENCY.name())
-                .setBuyPrice(BUY_PRICE.toPlainString())
-                .setSalePrice(SALE_PRICE.toPlainString());
+        exchangeRateDto = ExchangeRateDto.builder()
+                .baseCurrency(BASE_CURRENCY.name())
+                .currentCurrency(CURRENT_CURRENCY.name())
+                .buyPrice(BUY_PRICE.toPlainString())
+                .salePrice(SALE_PRICE.toPlainString())
+                .build();
         ReflectionTestUtils.setField(service, "apiUrl", API_URL);
     }
 
@@ -52,10 +58,10 @@ class CurrencyServiceTest {
     void whenUrlIsValidAndRestTemplateReturnObject() {
         ResponseEntity responseEntity = Mockito.mock(ResponseEntity.class);
         when(restTemplate.getForEntity(anyString(), any())).thenReturn(responseEntity);
-        when(responseEntity.getBody()).thenReturn(new ExchangeRateDto[] {exchangeRateDto});
+        when(responseEntity.getBody()).thenReturn(new ExchangeRateDto[]{exchangeRateDto});
         ArgumentCaptor<List<ExchangeRate>> listArg = ArgumentCaptor.forClass(List.class);
 
-        service.getUpdatedExchangeRates();
+        service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
         verify(rateMapper, atLeastOnce()).dtoToCurrency(any(ExchangeRateDto.class));
@@ -72,7 +78,7 @@ class CurrencyServiceTest {
     void whenUrlIsInvalid() {
         when(restTemplate.getForEntity(anyString(), any())).thenThrow(new RuntimeException("Could not extract response"));
 
-        assertThrows(RuntimeException.class, service::getUpdatedExchangeRates);
+        assertThrows(RuntimeException.class, service::updateExchangeRates);
 
         verify(restTemplate).getForEntity(anyString(), any());
         verify(rateMapper, never()).dtoToCurrency(any());
@@ -84,11 +90,10 @@ class CurrencyServiceTest {
         exchangeRateDto.setBaseCurrency(INVALID_CURRENCY);
         ResponseEntity responseEntity = Mockito.mock(ResponseEntity.class);
         when(restTemplate.getForEntity(anyString(), any())).thenReturn(responseEntity);
-        when(responseEntity.getBody()).thenReturn(new ExchangeRateDto[] {exchangeRateDto});
+        when(responseEntity.getBody()).thenReturn(new ExchangeRateDto[]{exchangeRateDto});
         ArgumentCaptor<List<ExchangeRate>> listArg = ArgumentCaptor.forClass(List.class);
 
-
-        service.getUpdatedExchangeRates();
+        service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
         verify(rateMapper, never()).dtoToCurrency(any(ExchangeRateDto.class));
@@ -101,11 +106,10 @@ class CurrencyServiceTest {
         exchangeRateDto.setCurrentCurrency(INVALID_CURRENCY);
         ResponseEntity responseEntity = Mockito.mock(ResponseEntity.class);
         when(restTemplate.getForEntity(anyString(), any())).thenReturn(responseEntity);
-        when(responseEntity.getBody()).thenReturn(new ExchangeRateDto[] {exchangeRateDto});
+        when(responseEntity.getBody()).thenReturn(new ExchangeRateDto[]{exchangeRateDto});
         ArgumentCaptor<List<ExchangeRate>> listArg = ArgumentCaptor.forClass(List.class);
 
-
-        service.getUpdatedExchangeRates();
+        service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
         verify(rateMapper, never()).dtoToCurrency(any(ExchangeRateDto.class));

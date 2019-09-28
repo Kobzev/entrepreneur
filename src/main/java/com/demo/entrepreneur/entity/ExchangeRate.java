@@ -1,14 +1,20 @@
-package com.demo.entrepreneur.model.entity;
+package com.demo.entrepreneur.entity;
 
 import com.demo.entrepreneur.model.enumeration.Currency;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
 
+@Builder
 @Data
-@Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "exchange_rates")
 public class ExchangeRate {
@@ -22,5 +28,6 @@ public class ExchangeRate {
     private Currency baseCurrency;
     private BigDecimal buyPrice;
     private BigDecimal salePrice;
-
+    @Builder.Default
+    private LocalDate date = LocalDate.now();
 }

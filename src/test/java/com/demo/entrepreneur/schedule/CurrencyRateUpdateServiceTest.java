@@ -10,15 +10,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class ScheduledTasksTest {
+class CurrencyRateUpdateServiceTest {
 
-    @InjectMocks private ScheduledTasks scheduledTasks;
+    @InjectMocks private CurrencyRateUpdateJob currencyRateUpdateService;
     @Mock private CurrencyService currencyService;
 
     @Test
     void whenScheduleCallUpdateRates() {
-        scheduledTasks.updateRates();
+        currencyRateUpdateService.updateRates();
 
-        verify(currencyService).getUpdatedExchangeRates();
+        verify(currencyService).updateExchangeRates();
     }
 }
