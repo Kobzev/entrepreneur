@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @Service
 public class CurrencyService {
 
-    private final Logger log = LoggerFactory.getLogger(CurrencyService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyService.class);
 
     @Value("${exchangeRate.api.url}")
     private String apiUrl;
@@ -36,20 +36,23 @@ public class CurrencyService {
         this.restTemplate = restTemplate;
     }
 
-    public void getUpdatedExchangeRates() {
-        log.info("Call currency api({}) to update currency.", apiUrl);
+    public void updateExchangeRates() {
+        LOGGER.info("Call currency api({}) to update currency.", apiUrl);
 
         ResponseEntity<ExchangeRateDto[]> responseEntity = restTemplate.getForEntity(apiUrl, ExchangeRateDto[].class);
         ExchangeRateDto[] rates = responseEntity.getBody();
-        List<ExchangeRate> exchangeRates = Stream.of(rates).filter(this::isExchangeValid)
+        List<ExchangeRate> exchangeRates = Stream.of(rates)
+                .filter(this::isExchangeValid)
                 .map(rateMapper::dtoToCurrency)
                 .collect(Collectors.toList());
-        rateRepository.saveAll(exchangeRates);
+        List<ExchangeRate> saved = rateRepository.saveAll(exchangeRates);
 
-        log.info(Arrays.toString(rates));
+        LOGGER.info("Saved rates: {}", saved);
     }
 
     private boolean isExchangeValid(ExchangeRateDto elem) {
-        return Currency.isValid(elem.getBaseCurrency()) && Currency.isValid(elem.getCurrentCurrency());
+        return Currency.isValid(elem.getBaseCurrency())
+                && Currency.isValid(elem.getCurrentCurrency())
+                && !elem.getCurrentCurrency().equals(elem.getBaseCurrency());
     }
 }
