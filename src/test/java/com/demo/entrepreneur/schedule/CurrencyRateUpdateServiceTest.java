@@ -19,6 +19,6 @@ class CurrencyRateUpdateServiceTest {
     void whenScheduleCallUpdateRates() {
         currencyRateUpdateService.updateRates();
 
-        verify(currencyService).getUpdatedExchangeRates();
+        verify(currencyService).updateExchangeRates();
     }
 }
