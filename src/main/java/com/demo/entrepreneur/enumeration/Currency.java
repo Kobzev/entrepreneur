@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.model.enumeration;
+package com.demo.entrepreneur.enumeration;
 
 import java.util.stream.Stream;
 

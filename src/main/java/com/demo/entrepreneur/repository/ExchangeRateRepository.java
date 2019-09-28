@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.model.repository;
+package com.demo.entrepreneur.repository;
 
 import com.demo.entrepreneur.model.entity.ExchangeRate;
 import org.springframework.data.repository.RepositoryDefinition;

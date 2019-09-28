@@ -1,8 +1,8 @@
-package com.demo.entrepreneur.model.mapping;
+package com.demo.entrepreneur.mapping;
 
-import com.demo.entrepreneur.model.dto.ExchangeRateDto;
-import com.demo.entrepreneur.model.entity.ExchangeRate;
-import com.demo.entrepreneur.model.enumeration.Currency;
+import com.demo.entrepreneur.dto.ExchangeRateDto;
+import com.demo.entrepreneur.entity.ExchangeRate;
+import com.demo.entrepreneur.enumeration.Currency;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

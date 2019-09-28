@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.model.entity;
+package com.demo.entrepreneur.entity;
 
 
 import com.demo.entrepreneur.model.enumeration.Currency;

@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class CurrencyRateUpdateServiceTest {
 
-    @InjectMocks private CurrencyRateUpdateService currencyRateUpdateService;
+    @InjectMocks private CurrencyRateUpdateJob currencyRateUpdateService;
     @Mock private CurrencyService currencyService;
 
     @Test

@@ -1,10 +1,10 @@
 package com.demo.entrepreneur.service;
 
-import com.demo.entrepreneur.model.dto.ExchangeRateDto;
-import com.demo.entrepreneur.model.entity.ExchangeRate;
-import com.demo.entrepreneur.model.enumeration.Currency;
-import com.demo.entrepreneur.model.mapping.ExchangeRateMapper;
-import com.demo.entrepreneur.model.repository.ExchangeRateRepository;
+import com.demo.entrepreneur.dto.ExchangeRateDto;
+import com.demo.entrepreneur.entity.ExchangeRate;
+import com.demo.entrepreneur.enumeration.Currency;
+import com.demo.entrepreneur.mapping.ExchangeRateMapper;
+import com.demo.entrepreneur.repository.ExchangeRateRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
