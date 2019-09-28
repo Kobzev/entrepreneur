@@ -1,10 +1,8 @@
 package com.demo.entrepreneur.model.entity;
 
-
 import com.demo.entrepreneur.model.enumeration.Currency;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -16,7 +14,7 @@ import java.math.BigInteger;
 public class ExchangeRate {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
     @Enumerated(EnumType.STRING)
     private Currency currentCurrency;
