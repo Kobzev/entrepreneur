@@ -1,6 +1,5 @@
 package com.demo.entrepreneur.entity;
 
-
 import com.demo.entrepreneur.model.enumeration.Currency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
