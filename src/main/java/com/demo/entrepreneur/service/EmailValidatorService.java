@@ -1,6 +1,6 @@
 package com.demo.entrepreneur.service;
 
-import com.demo.entrepreneur.model.User;
+import com.demo.entrepreneur.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
