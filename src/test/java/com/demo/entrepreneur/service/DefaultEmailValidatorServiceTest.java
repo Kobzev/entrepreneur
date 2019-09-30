@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class EmailValidatorServiceTest {
+class DefaultEmailValidatorServiceTest {
     @InjectMocks
     private EmailValidatorService emailValidator;
     @Mock
