@@ -1,11 +1,10 @@
 package com.demo.entrepreneur.dao;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.demo.entrepreneur.entity.User;
 import org.springframework.data.repository.RepositoryDefinition;
 
-import com.demo.entrepreneur.model.User;
+import java.util.List;
+import java.util.Optional;
 
 @RepositoryDefinition(domainClass = User.class, idClass = Long.class)
 public interface UserRepository {

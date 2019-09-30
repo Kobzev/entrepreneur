@@ -3,7 +3,7 @@ package com.demo.entrepreneur.service;
 import java.util.Collection;
 
 import com.demo.entrepreneur.dto.UserDto;
-import com.demo.entrepreneur.model.User;
+import com.demo.entrepreneur.entity.User;
 
 public interface UserService {
 

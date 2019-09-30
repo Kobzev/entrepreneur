@@ -1,9 +1,9 @@
 package com.demo.entrepreneur.model.mapping.populator.impl;
 
+import com.demo.entrepreneur.entity.User;
 import org.springframework.stereotype.Component;
 
 import com.demo.entrepreneur.dto.UserDto;
-import com.demo.entrepreneur.model.User;
 import com.demo.entrepreneur.model.mapping.populator.Populator;
 
 @Component

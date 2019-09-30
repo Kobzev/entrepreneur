@@ -1,6 +1,6 @@
 package com.demo.entrepreneur.entity;
 
-import com.demo.entrepreneur.model.enumeration.Currency;
+import com.demo.entrepreneur.enumeration.Currency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

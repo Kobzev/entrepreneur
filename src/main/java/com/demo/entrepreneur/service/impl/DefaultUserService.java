@@ -4,13 +4,13 @@ import java.util.Collection;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.demo.entrepreneur.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.demo.entrepreneur.dao.UserRepository;
 import com.demo.entrepreneur.dto.UserDto;
-import com.demo.entrepreneur.model.User;
 import com.demo.entrepreneur.model.mapping.populator.impl.UserPopulator;
 import com.demo.entrepreneur.service.UserService;
 

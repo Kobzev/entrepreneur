@@ -1,10 +1,9 @@
 package com.demo.entrepreneur.model.mapping.mapper.impl;
 
-import org.springframework.stereotype.Component;
-
 import com.demo.entrepreneur.dto.UserDto;
-import com.demo.entrepreneur.model.User;
+import com.demo.entrepreneur.entity.User;
 import com.demo.entrepreneur.model.mapping.mapper.Mapper;
+import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper implements Mapper<UserDto, User> {
