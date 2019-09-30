@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.model.mapping.mapper.impl;
+package com.demo.entrepreneur.mapping.mapper.impl;
 
 import com.demo.entrepreneur.dto.PublicUserDto;
 import com.demo.entrepreneur.entity.User;

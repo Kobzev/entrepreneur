@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.model.mapping.populator.impl;
+package com.demo.entrepreneur.mapping.populator.impl;
 
 import com.demo.entrepreneur.entity.User;
 import org.springframework.stereotype.Component;

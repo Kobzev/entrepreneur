@@ -1,5 +1,5 @@
-package com.demo.entrepreneur.model.mapping.populator;
+package com.demo.entrepreneur.mapping.populator;
 
-public interface Populator<Data, Entity> {
-	Entity populateDataToEntity(Data data, Entity entity);
+public interface Populator<D, E> {
+	E populateDataToEntity(D data, E entity);
 }

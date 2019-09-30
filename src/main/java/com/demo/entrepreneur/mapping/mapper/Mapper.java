@@ -1,5 +1,5 @@
-package com.demo.entrepreneur.model.mapping.mapper;
+package com.demo.entrepreneur.mapping.mapper;
 
-public interface Mapper<Data, Entity> {
-	Data entityToData(Entity entity);
+public interface Mapper<D, E> {
+	D entityToData(E entity);
 }
