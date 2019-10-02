@@ -4,7 +4,7 @@ import com.demo.entrepreneur.entity.User;
 import org.springframework.stereotype.Component;
 
 import com.demo.entrepreneur.dto.UserDto;
-import com.demo.entrepreneur.model.mapping.populator.Populator;
+import com.demo.entrepreneur.mapping.populator.Populator;
 
 @Component
 public class UserPopulator implements Populator<UserDto, User> {

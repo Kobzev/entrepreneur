@@ -1,6 +1,6 @@
 package com.demo.entrepreneur.service.impl;
 
-import com.demo.entrepreneur.dao.UserRepository;
+import com.demo.entrepreneur.repository.UserRepository;
 import com.demo.entrepreneur.dto.UserDto;
 import com.demo.entrepreneur.entity.User;
 import com.demo.entrepreneur.mapping.populator.impl.UserPopulator;
