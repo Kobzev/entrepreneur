@@ -2,7 +2,7 @@ package com.demo.entrepreneur.mapping.mapper.impl;
 
 import com.demo.entrepreneur.dto.PublicUserDto;
 import com.demo.entrepreneur.entity.User;
-import com.demo.entrepreneur.model.mapping.mapper.Mapper;
+import com.demo.entrepreneur.mapping.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
