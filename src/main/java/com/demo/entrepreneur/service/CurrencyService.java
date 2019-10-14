@@ -3,7 +3,8 @@ package com.demo.entrepreneur.service;
 import com.demo.entrepreneur.dto.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
 import com.demo.entrepreneur.enumeration.Currency;
-import com.demo.entrepreneur.mapping.ExchangeRateMapper;
+import com.demo.entrepreneur.mapping.mapper.impl.ExchangeRateMapper;
+import com.demo.entrepreneur.mapping.populator.impl.ExchangeRatePopulator;
 import com.demo.entrepreneur.repository.ExchangeRateRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,16 +25,16 @@ public class CurrencyService {
 
     @Value("${exchangeRate.api.url}")
     private String apiUrl;
-    private ExchangeRateRepository rateRepository;
-    private ExchangeRateMapper rateMapper;
-    private RestTemplate restTemplate;
 
     @Autowired
-    public CurrencyService(ExchangeRateRepository rateRepository, ExchangeRateMapper rateMapper, RestTemplate restTemplate) {
-        this.rateRepository = rateRepository;
-        this.rateMapper = rateMapper;
-        this.restTemplate = restTemplate;
-    }
+    private ExchangeRateRepository rateRepository;
+
+    @Autowired
+    private ExchangeRatePopulator ratePopulator;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
 
     public void updateExchangeRates() {
         LOGGER.info("Call currency api({}) to update currency.", apiUrl);
@@ -42,7 +43,7 @@ public class CurrencyService {
         ExchangeRateDto[] rates = responseEntity.getBody();
         List<ExchangeRate> exchangeRates = Stream.of(rates)
                 .filter(this::isExchangeValid)
-                .map(rateMapper::dtoToCurrency)
+                .map(ratePopulator::populateDataToEntity)
                 .collect(Collectors.toList());
         List<ExchangeRate> saved = rateRepository.saveAll(exchangeRates);
 

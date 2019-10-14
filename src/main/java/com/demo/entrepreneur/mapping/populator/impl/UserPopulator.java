@@ -9,14 +9,14 @@ import com.demo.entrepreneur.mapping.populator.Populator;
 @Component
 public class UserPopulator implements Populator<UserDto, User> {
 
-	@Override
-	public User populateDataToEntity(UserDto data, User entity) {
-	    entity.setLogin(data.getLogin());
-		entity.setEmail(data.getEmail());
-		entity.setFirstName(data.getFirstName());
-		entity.setLastName(data.getLastName());
-		entity.setPassword(data.getPassword());
-		return entity;
-	}
+    @Override
+    public User populateDataToEntity(UserDto data, User entity) {
+        entity.setLogin(data.getLogin());
+        entity.setEmail(data.getEmail());
+        entity.setFirstName(data.getFirstName());
+        entity.setLastName(data.getLastName());
+        entity.setPassword(data.getPassword());
+        return entity;
+    }
 
 }
