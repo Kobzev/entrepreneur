@@ -28,15 +28,15 @@ class CurrencyServiceTest {
 
     @InjectMocks
     private CurrencyService service;
+
     @Mock
     private ExchangeRateRepository rateRepository;
+
     @Mock
     private RestTemplate restTemplate;
-    @Spy
-    private ExchangeRateMapper rateMapper = new ExchangeRateMapper();
 
     @Spy
-    private ExchangeRatePopulator ratePopulator=new ExchangeRatePopulator();
+    private ExchangeRatePopulator ratePopulator = new ExchangeRatePopulator();
 
     private static final Currency CURRENT_CURRENCY = Currency.USD;
     private static final Currency BASE_CURRENCY = Currency.UAH;

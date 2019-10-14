@@ -14,8 +14,10 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class EmailValidatorServiceTest {
+
     @InjectMocks
     private EmailValidatorService emailValidator;
+
     @Mock
     private EmailSenderService emailSenderService;
 
@@ -35,7 +37,7 @@ class EmailValidatorServiceTest {
         user.setId(123L);
         user.setEmail("user1g.c");
 
-        assertThrows(RuntimeException.class,  () -> emailValidator.checkIfEmailIsValid(user));
+        assertThrows(RuntimeException.class, () -> emailValidator.checkIfEmailIsValid(user));
     }
 
     @Test

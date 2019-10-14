@@ -19,4 +19,13 @@ public class UserPopulator implements Populator<UserDto, User> {
         return entity;
     }
 
+    @Override
+    public User populateDataToEntity(UserDto data) {
+        return User.builder()
+                .login(data.getLogin())
+                .email(data.getEmail())
+                .firstName(data.getFirstName())
+                .lastName(data.getLastName())
+                .password(data.getPassword()).build();
+    }
 }

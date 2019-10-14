@@ -23,7 +23,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public User registerNewUser(UserDto userDto) {
-        final User user = userPopulator.populateDataToEntity(userDto, new User());
+        final User user = userPopulator.populateDataToEntity(userDto);
         return userRepository.save(user);
     }
 
