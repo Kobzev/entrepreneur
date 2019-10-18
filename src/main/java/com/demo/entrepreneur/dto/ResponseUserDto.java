@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PublicUserDto {
+public class ResponseUserDto {
 
     @Schema(description = "user login", required = true, accessMode = AccessMode.READ_ONLY)
     @JsonProperty("login")

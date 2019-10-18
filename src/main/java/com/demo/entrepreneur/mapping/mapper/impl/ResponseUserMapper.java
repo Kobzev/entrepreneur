@@ -1,21 +1,20 @@
 package com.demo.entrepreneur.mapping.mapper.impl;
 
-import com.demo.entrepreneur.dto.UserDto;
+import com.demo.entrepreneur.dto.ResponseUserDto;
 import com.demo.entrepreneur.entity.User;
 import com.demo.entrepreneur.mapping.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper implements Mapper<UserDto, User> {
+public class ResponseUserMapper implements Mapper<ResponseUserDto, User> {
 
     @Override
-    public UserDto entityToData(User entity) {
-        return UserDto.builder()// @formatter:off
+    public ResponseUserDto entityToData(User entity) {
+        return ResponseUserDto.builder()// @formatter:off
                 .email(entity.getEmail())
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
-                .login(entity.getLogin())
-                .password(entity.getPassword()).build();// @formatter:on
+                .login(entity.getLogin()).build();// @formatter:on
     }
 
 }

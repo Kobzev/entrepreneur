@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserDto {
+public class RequestUserDto {
 
     @Schema(description = "user login", required = true)
     @JsonProperty("login")
