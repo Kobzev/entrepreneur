@@ -102,6 +102,13 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>com/demo/entrepreneur/dto/**/*</exclude>
+						<exclude>com/demo/entrepreneur/entity/**/*</exclude>
+						<exclude>com/demo/entrepreneur/rest/**/*</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -111,7 +118,7 @@
 					<!-- attached to Maven test phase -->
 					<execution>
 						<id>report</id>
-						<phase>test</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>

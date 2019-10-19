@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @EnableTransactionManagement
 public class Config {
+
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
