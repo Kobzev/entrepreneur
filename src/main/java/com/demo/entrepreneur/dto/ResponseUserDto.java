@@ -15,16 +15,19 @@ import lombok.NoArgsConstructor;
 @Data
 public class ResponseUserDto {
 
-    @Schema(description = "user login", required = true, accessMode = AccessMode.READ_ONLY)
-    @JsonProperty("login")
+    @Schema(description = "user login", accessMode = AccessMode.READ_ONLY)
+    @JsonProperty(value = "login", required = true)
     private String login;
-    @Schema(required = true)
-    @JsonProperty("email")
+    @JsonProperty(value = "email", required = true)
     private String email;
-    @Schema(required = true)
-    @JsonProperty("firstName")
+    @JsonProperty(value = "firstName", required = false)
     private String firstName;
-    @Schema(required = true)
-    @JsonProperty("lastName")
+    @JsonProperty(value = "lastName", required = false)
     private String lastName;
+
+    @JsonProperty(value = "approximateIncomeInUsd", required = false)
+    private Integer approximateIncomeInUsd;
+
+    @JsonProperty(value = "taxGroup", required = true)
+    private Integer taxGroup;
 }

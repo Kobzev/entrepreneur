@@ -5,7 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @NoArgsConstructor
@@ -18,19 +21,22 @@ public class RequestUserDto {
     @JsonProperty("login")
     private String login;
 
-    @Schema(description = "user password", required = true, accessMode = AccessMode.WRITE_ONLY)
-    @JsonProperty("password")
+    @Schema(description = "user password", accessMode = AccessMode.WRITE_ONLY)
+    @JsonProperty(value = "password", required = true)
     private String password;
 
-    @Schema(required = true)
-    @JsonProperty("email")
+    @JsonProperty(value = "email", required = true)
     private String email;
 
-    @Schema(required = true)
-    @JsonProperty("firstName")
+    @JsonProperty(value = "firstName", required = false)
     private String firstName;
 
-    @Schema(required = true)
-    @JsonProperty("lastName")
+    @JsonProperty(value = "lastName", required = false)
     private String lastName;
+
+    @JsonProperty(value = "approximateIncomeInUsd", required = false)
+    private Integer approximateIncomeInUsd;
+
+    @JsonProperty(value = "taxGroup", required = true)
+    private Integer taxGroup;
 }

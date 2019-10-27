@@ -15,7 +15,9 @@ public class RequestUserMapper implements Mapper<RequestUserDto, User> {
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .login(entity.getLogin())
-                .password(entity.getPassword()).build();// @formatter:on
+                .password(entity.getPassword())
+                .approximateIncomeInUsd(entity.getApproximateIncomeInUsd())
+                .taxGroup(entity.getTaxGroup().getGroupNumber()).build();// @formatter:on
     }
 
 }
