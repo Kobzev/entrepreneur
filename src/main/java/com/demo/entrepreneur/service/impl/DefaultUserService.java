@@ -1,9 +1,9 @@
 package com.demo.entrepreneur.service.impl;
 
 import com.demo.entrepreneur.repository.UserRepository;
-import com.demo.entrepreneur.dto.UserDto;
+import com.demo.entrepreneur.dto.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
-import com.demo.entrepreneur.mapping.populator.impl.UserPopulator;
+import com.demo.entrepreneur.mapping.populator.impl.RequestUserPopulator;
 import com.demo.entrepreneur.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +16,14 @@ import java.util.Collection;
 public class DefaultUserService implements UserService {
 
     @Autowired
-    private UserPopulator userPopulator;
+    private RequestUserPopulator requestUserPopulator;
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public User registerNewUser(UserDto userDto) {
-        final User user = userPopulator.populateDataToEntity(userDto);
+    public User registerNewUser(RequestUserDto requestUserDto) {
+        final User user = requestUserPopulator.populateDataToEntity(requestUserDto, new User());
         return userRepository.save(user);
     }
 
@@ -39,9 +39,9 @@ public class DefaultUserService implements UserService {
 
     @Transactional
     @Override
-    public User updateUserByLogin(String login, UserDto userDto) {
+    public User updateUserByLogin(String login, RequestUserDto requestUserDto) {
         final User user = getUserByLogin(login);
-        return userPopulator.populateDataToEntity(userDto, user);
+        return requestUserPopulator.populateDataToEntity(requestUserDto, user);
     }
 
     @Override
