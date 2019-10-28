@@ -41,7 +41,7 @@ public class CurrencyService {
         ExchangeRateDto[] rates = responseEntity.getBody();
         List<ExchangeRate> exchangeRates = Stream.of(rates)
                 .filter(this::isExchangeValid)
-                .map(rateMapper::dataToTheEntity)
+                .map(rateMapper::dataToEntity)
                 .collect(Collectors.toList());
         List<ExchangeRate> saved = rateRepository.saveAll(exchangeRates);
 

@@ -20,7 +20,7 @@ public class RequestUserMapper implements Mapper<RequestUserDto, User> {
 
 
     @Override
-    public User dataToTheEntity(RequestUserDto data) {
+    public User dataToEntity(RequestUserDto data) {
         return User.builder()
                 .login(data.getLogin())
                 .email(data.getEmail())
