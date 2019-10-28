@@ -1,6 +1,9 @@
 package com.demo.entrepreneur.service.impl;
 
+import com.demo.entrepreneur.entity.ConfirmationToken;
+import com.demo.entrepreneur.exception.InvalidConfirmationTokenException;
 import com.demo.entrepreneur.exception.UnsupportedEmailException;
+import com.demo.entrepreneur.repository.ConfirmationTokenRepository;
 import com.demo.entrepreneur.repository.UserRepository;
 import com.demo.entrepreneur.dto.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
@@ -30,14 +33,18 @@ public class DefaultUserService implements UserService {
     @Autowired
     private EmailSenderService emailSender;
 
+    @Autowired
+    private ConfirmationTokenRepository confirmationTokenRepository;
+
     @Override
     public User registerNewUser(RequestUserDto requestUserDto) {
         if (!emailValidator.isValid(requestUserDto.getEmail())) {
             throw new UnsupportedEmailException("User email is not valid");
         }
         final User user = requestUserPopulator.populateDataToEntity(requestUserDto, new User());
-        emailSender.sendVerificationEmail(user.getEmail());
-        return userRepository.save(user);
+        userRepository.save(user);
+        emailSender.sendVerificationEmail(user);
+        return user;
     }
 
     @Override
@@ -61,6 +68,18 @@ public class DefaultUserService implements UserService {
     public void deleteUserByLogin(String login) {
         final User user = getUserByLogin(login);
         userRepository.delete(user);
+    }
+
+    public void confirmEmail(String token) {
+        ConfirmationToken confirmationToken = confirmationTokenRepository.findByToken(token);
+
+        if (confirmationToken == null) {
+            throw new InvalidConfirmationTokenException("Invalid token");
+        }
+
+        User user = userRepository.findByEmail(confirmationToken.getUser().getEmail());
+        user.setActivated(true);
+        userRepository.save(user);
     }
 
 }
