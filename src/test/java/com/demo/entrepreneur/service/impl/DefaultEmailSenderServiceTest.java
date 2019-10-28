@@ -31,7 +31,7 @@ class DefaultEmailSenderServiceTest {
         smm.setText("Welcome to entrepreneur app!");
         smm.setTo(user.getEmail());
 
-        emailSender.sendVerificationEmail(user.getEmail());
+        emailSender.sendVerificationEmail(user);
 
         verify(javaMailSender, atLeastOnce()).send(smm);
     }

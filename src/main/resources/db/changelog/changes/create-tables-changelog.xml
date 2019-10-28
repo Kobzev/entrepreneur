@@ -50,4 +50,28 @@
             </column>
         </addColumn>
     </changeSet>
+
+    <changeSet id="20191028150500" author="Valeriia_Voinalovych">
+        <createTable tableName="confirmation_tokens">
+            <column name="token_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="token" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="bigint(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20191028150600" author="Valeriia_Voinalovych">
+        <addColumn tableName="users">
+            <column name="is_activated" type="bit(1)"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
