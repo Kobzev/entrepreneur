@@ -6,8 +6,6 @@ import com.demo.entrepreneur.enumeration.Currency;
 import com.demo.entrepreneur.mapping.mapper.impl.ExchangeRateMapper;
 import com.demo.entrepreneur.repository.ExchangeRateRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +41,7 @@ public class CurrencyService {
         ExchangeRateDto[] rates = responseEntity.getBody();
         List<ExchangeRate> exchangeRates = Stream.of(rates)
                 .filter(this::isExchangeValid)
-                .map(rateMapper::dataToTheNewEntity)
+                .map(rateMapper::dataToTheEntity)
                 .collect(Collectors.toList());
         List<ExchangeRate> saved = rateRepository.saveAll(exchangeRates);
 

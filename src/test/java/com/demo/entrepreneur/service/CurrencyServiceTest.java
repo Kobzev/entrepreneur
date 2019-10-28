@@ -64,7 +64,7 @@ class CurrencyServiceTest {
         service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
-        verify(rateMapper, atLeastOnce()).dataToTheNewEntity(any(ExchangeRateDto.class));
+        verify(rateMapper, atLeastOnce()).dataToTheEntity(any(ExchangeRateDto.class));
         verify(rateRepository).saveAll(listArg.capture());
         listArg.getValue().forEach(elem -> {
             assertEquals(Currency.valueOf(exchangeRateDto.getCurrentCurrency()), elem.getCurrentCurrency());
@@ -81,7 +81,7 @@ class CurrencyServiceTest {
         assertThrows(RuntimeException.class, service::updateExchangeRates);
 
         verify(restTemplate).getForEntity(anyString(), any());
-        verify(rateMapper, never()).dataToTheNewEntity(any());
+        verify(rateMapper, never()).dataToTheEntity(any());
         verify(rateRepository, never()).saveAll(anyIterable());
     }
 
@@ -96,7 +96,7 @@ class CurrencyServiceTest {
         service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
-        verify(rateMapper, never()).dataToTheNewEntity(any(ExchangeRateDto.class));
+        verify(rateMapper, never()).dataToTheEntity(any(ExchangeRateDto.class));
         verify(rateRepository).saveAll(listArg.capture());
         assertTrue(listArg.getValue().isEmpty());
     }
@@ -112,7 +112,7 @@ class CurrencyServiceTest {
         service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
-        verify(rateMapper, never()).dataToTheNewEntity(any(ExchangeRateDto.class));
+        verify(rateMapper, never()).dataToTheEntity(any(ExchangeRateDto.class));
         verify(rateRepository).saveAll(listArg.capture());
         assertTrue(listArg.getValue().isEmpty());
     }

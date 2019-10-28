@@ -145,7 +145,6 @@
 					<excludes>
 						<exclude>com/demo/entrepreneur/dto/**/*</exclude>
 						<exclude>com/demo/entrepreneur/entity/**/*</exclude>
-						<exclude>com/demo/entrepreneur/rest/**/*</exclude>
 					</excludes>
 				</configuration>
 				<executions>

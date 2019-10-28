@@ -25,7 +25,7 @@ public class ExchangeRateMapper implements Mapper<ExchangeRateDto, ExchangeRate>
     }
 
 
-    public ExchangeRate dataToTheNewEntity(ExchangeRateDto dto) {
+    public ExchangeRate dataToTheEntity(ExchangeRateDto dto) {
         return ExchangeRate.builder()
                 .currentCurrency(Currency.valueOf(dto.getCurrentCurrency()))
                 .baseCurrency(Currency.valueOf(dto.getBaseCurrency()))

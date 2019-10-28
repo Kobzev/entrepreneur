@@ -18,7 +18,7 @@ public class ResponseUserMapper implements Mapper<ResponseUserDto, User> {
     }
 
     @Override
-    public User dataToTheNewEntity(ResponseUserDto data) {
+    public User dataToTheEntity(ResponseUserDto data) {
         return User.builder()
                 .login(data.getLogin())
                 .email(data.getEmail())
