@@ -22,15 +22,6 @@ public class ExchangeRatePopulator implements Populator<ExchangeRateDto, Exchang
         return entity;
     }
 
-    @Override
-    public ExchangeRate populateDataToEntity(ExchangeRateDto dto) {
-        return ExchangeRate.builder()
-                .currentCurrency(Currency.valueOf(dto.getCurrentCurrency()))
-                .baseCurrency(Currency.valueOf(dto.getBaseCurrency()))
-                .salePrice(new BigDecimal(dto.getSalePrice()))
-                .buyPrice(new BigDecimal(dto.getBuyPrice()))
-                .date(dto.getDate())
-                .build();
-    }
+
 
 }

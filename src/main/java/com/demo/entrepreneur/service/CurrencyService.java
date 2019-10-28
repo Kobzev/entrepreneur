@@ -4,8 +4,8 @@ import com.demo.entrepreneur.dto.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
 import com.demo.entrepreneur.enumeration.Currency;
 import com.demo.entrepreneur.mapping.mapper.impl.ExchangeRateMapper;
-import com.demo.entrepreneur.mapping.populator.impl.ExchangeRatePopulator;
 import com.demo.entrepreneur.repository.ExchangeRateRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,36 +18,36 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @Service
 public class CurrencyService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyService.class);
 
     @Value("${exchangeRate.api.url}")
     private String apiUrl;
-
-    @Autowired
     private ExchangeRateRepository rateRepository;
-
-    @Autowired
-    private ExchangeRatePopulator ratePopulator;
-
-    @Autowired
+    private ExchangeRateMapper rateMapper;
     private RestTemplate restTemplate;
 
+    @Autowired
+    public CurrencyService(ExchangeRateRepository rateRepository, ExchangeRateMapper rateMapper, RestTemplate restTemplate) {
+        this.rateRepository = rateRepository;
+        this.rateMapper = rateMapper;
+        this.restTemplate = restTemplate;
+    }
 
     public void updateExchangeRates() {
-        LOGGER.info("Call currency api({}) to update currency.", apiUrl);
+        log.info("Call currency api({}) to update currency.", apiUrl);
 
         ResponseEntity<ExchangeRateDto[]> responseEntity = restTemplate.getForEntity(apiUrl, ExchangeRateDto[].class);
         ExchangeRateDto[] rates = responseEntity.getBody();
         List<ExchangeRate> exchangeRates = Stream.of(rates)
                 .filter(this::isExchangeValid)
-                .map(ratePopulator::populateDataToEntity)
+                .map(rateMapper::dataToTheNewEntity)
                 .collect(Collectors.toList());
         List<ExchangeRate> saved = rateRepository.saveAll(exchangeRates);
 
-        LOGGER.info("Saved rates: {}", saved);
+        log.info("Saved rates: {}", saved);
     }
 
     private boolean isExchangeValid(ExchangeRateDto elem) {

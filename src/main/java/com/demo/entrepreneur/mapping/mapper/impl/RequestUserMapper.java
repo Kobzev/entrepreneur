@@ -18,4 +18,16 @@ public class RequestUserMapper implements Mapper<RequestUserDto, User> {
                 .password(entity.getPassword()).build();// @formatter:on
     }
 
+
+    @Override
+    public User dataToTheNewEntity(RequestUserDto data) {
+        return User.builder()
+                .login(data.getLogin())
+                .email(data.getEmail())
+                .firstName(data.getFirstName())
+                .lastName(data.getLastName())
+                .password(data.getPassword()).build();
+    }
+
+
 }

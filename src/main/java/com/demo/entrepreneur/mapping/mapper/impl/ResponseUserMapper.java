@@ -17,4 +17,13 @@ public class ResponseUserMapper implements Mapper<ResponseUserDto, User> {
                 .login(entity.getLogin()).build();// @formatter:on
     }
 
+    @Override
+    public User dataToTheNewEntity(ResponseUserDto data) {
+        return User.builder()
+                .login(data.getLogin())
+                .email(data.getEmail())
+                .firstName(data.getFirstName())
+                .lastName(data.getLastName()).build();
+    }
+
 }
