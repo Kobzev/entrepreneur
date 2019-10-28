@@ -19,6 +19,7 @@
 		<junit.jupiter.version>5.5.1</junit.jupiter.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<springdoc-openapi.version>1.1.47</springdoc-openapi.version>
+		<jacoco.version>0.8.2</jacoco.version>
 	</properties>
 
 	<dependencies>
@@ -131,6 +132,34 @@
 						<id>integration-test</id>
 						<goals>
 							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>com/demo/entrepreneur/dto/**/*</exclude>
+						<exclude>com/demo/entrepreneur/entity/**/*</exclude>
+						<exclude>com/demo/entrepreneur/rest/**/*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<!-- attached to Maven test phase -->
+					<execution>
+						<id>report</id>
+						<phase>package</phase>
+						<goals>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
