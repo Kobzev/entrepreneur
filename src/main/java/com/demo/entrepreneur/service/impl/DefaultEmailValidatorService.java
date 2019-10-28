@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class DefaultEmailValidatorService implements EmailValidatorService {
 
-    @Value("${mail.prohibited.domains}")
+    @Value("#{'${mail.prohibited.domains}'.split(',')}")
     private List<String> prohibitedDomains;
 
     @Override

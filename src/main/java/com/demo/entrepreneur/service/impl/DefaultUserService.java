@@ -1,10 +1,10 @@
 package com.demo.entrepreneur.service.impl;
 
+import com.demo.entrepreneur.exception.UnsupportedEmailException;
 import com.demo.entrepreneur.repository.UserRepository;
 import com.demo.entrepreneur.dto.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
 import com.demo.entrepreneur.mapping.populator.impl.RequestUserPopulator;
-import com.demo.entrepreneur.mapping.populator.impl.UserPopulator;
 import com.demo.entrepreneur.service.EmailSenderService;
 import com.demo.entrepreneur.service.EmailValidatorService;
 import com.demo.entrepreneur.service.UserService;
@@ -29,23 +29,16 @@ public class DefaultUserService implements UserService {
 
     @Autowired
     private EmailSenderService emailSender;
-/*
+
     @Override
     public User registerNewUser(RequestUserDto requestUserDto) {
-        final User user = requestUserPopulator.populateDataToEntity(requestUserDto, new User());
-        return userRepository.save(user);
-    }
-*/
-    @Override
-    public User registerNewUser(UserDto userDto) {
-        if (!emailValidator.isValid(userDto.getEmail())) {
-            throw new IllegalArgumentException("User email is not valid");
+        if (!emailValidator.isValid(requestUserDto.getEmail())) {
+            throw new UnsupportedEmailException("User email is not valid");
         }
-        final User user = userPopulator.populateDataToEntity(userDto, new User());
+        final User user = requestUserPopulator.populateDataToEntity(requestUserDto, new User());
         emailSender.sendVerificationEmail(user.getEmail());
         return userRepository.save(user);
     }
-
 
     @Override
     public Collection<User> getAllUsers() {
