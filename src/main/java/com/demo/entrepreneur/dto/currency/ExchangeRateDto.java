@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.dto;
+package com.demo.entrepreneur.dto.currency;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

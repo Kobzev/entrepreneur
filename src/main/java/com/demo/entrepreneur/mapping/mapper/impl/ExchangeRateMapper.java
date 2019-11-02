@@ -1,6 +1,6 @@
 package com.demo.entrepreneur.mapping.mapper.impl;
 
-import com.demo.entrepreneur.dto.ExchangeRateDto;
+import com.demo.entrepreneur.dto.currency.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
 import com.demo.entrepreneur.mapping.mapper.Mapper;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,7 @@ package com.demo.entrepreneur.service;
 
 import java.util.Collection;
 
-import com.demo.entrepreneur.dto.RequestUserDto;
+import com.demo.entrepreneur.dto.user.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
 
 public interface UserService {

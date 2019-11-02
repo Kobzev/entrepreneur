@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.rest;
+package com.demo.entrepreneur.controller;
 
 import com.demo.entrepreneur.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;

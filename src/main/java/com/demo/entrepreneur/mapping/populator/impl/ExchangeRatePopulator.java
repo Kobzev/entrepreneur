@@ -1,6 +1,6 @@
 package com.demo.entrepreneur.mapping.populator.impl;
 
-import com.demo.entrepreneur.dto.ExchangeRateDto;
+import com.demo.entrepreneur.dto.currency.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
 import com.demo.entrepreneur.enumeration.Currency;
 import com.demo.entrepreneur.mapping.populator.Populator;

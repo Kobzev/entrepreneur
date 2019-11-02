@@ -1,6 +1,6 @@
 package com.demo.entrepreneur.mapping.mapper.impl;
 
-import com.demo.entrepreneur.dto.ResponseUserDto;
+import com.demo.entrepreneur.dto.user.ResponseUserDto;
 import com.demo.entrepreneur.entity.User;
 import com.demo.entrepreneur.mapping.mapper.Mapper;
 import org.springframework.stereotype.Component;

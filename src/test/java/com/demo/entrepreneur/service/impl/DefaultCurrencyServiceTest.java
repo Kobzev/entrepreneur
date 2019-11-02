@@ -1,6 +1,6 @@
-package com.demo.entrepreneur.service;
+package com.demo.entrepreneur.service.impl;
 
-import com.demo.entrepreneur.dto.ExchangeRateDto;
+import com.demo.entrepreneur.dto.currency.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
 import com.demo.entrepreneur.enumeration.Currency;
 import com.demo.entrepreneur.mapping.populator.impl.ExchangeRatePopulator;
@@ -23,10 +23,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CurrencyServiceTest {
+class DefaultCurrencyServiceTest {
 
     @InjectMocks
-    private CurrencyService service;
+    private DefaultCurrencyService service;
     @Mock
     private ExchangeRateRepository rateRepository;
     @Mock
