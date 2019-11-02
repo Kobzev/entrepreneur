@@ -3,7 +3,7 @@ package com.demo.entrepreneur.mapping.populator.impl;
 import com.demo.entrepreneur.entity.User;
 import org.springframework.stereotype.Component;
 
-import com.demo.entrepreneur.dto.RequestUserDto;
+import com.demo.entrepreneur.dto.user.RequestUserDto;
 import com.demo.entrepreneur.mapping.populator.Populator;
 
 @Component
