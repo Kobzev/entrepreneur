@@ -3,7 +3,7 @@ package com.demo.entrepreneur.service;
 import com.demo.entrepreneur.dto.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
 import com.demo.entrepreneur.enumeration.Currency;
-import com.demo.entrepreneur.mapping.ExchangeRateMapper;
+import com.demo.entrepreneur.mapping.populator.impl.ExchangeRatePopulator;
 import com.demo.entrepreneur.repository.ExchangeRateRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class CurrencyServiceTest {
     @Mock
     private RestTemplate restTemplate;
     @Spy
-    private ExchangeRateMapper rateMapper = new ExchangeRateMapper();
+    private ExchangeRatePopulator exchangeRatePopulator = new ExchangeRatePopulator();
 
     private static final Currency CURRENT_CURRENCY = Currency.USD;
     private static final Currency BASE_CURRENCY = Currency.UAH;
@@ -64,7 +64,7 @@ class CurrencyServiceTest {
         service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
-        verify(rateMapper, atLeastOnce()).dtoToCurrency(any(ExchangeRateDto.class));
+        verify(exchangeRatePopulator, atLeastOnce()).populateDataToEntity(any(ExchangeRateDto.class), any(ExchangeRate.class));
         verify(rateRepository).saveAll(listArg.capture());
         listArg.getValue().forEach(elem -> {
             assertEquals(Currency.valueOf(exchangeRateDto.getCurrentCurrency()), elem.getCurrentCurrency());
@@ -81,7 +81,7 @@ class CurrencyServiceTest {
         assertThrows(RuntimeException.class, service::updateExchangeRates);
 
         verify(restTemplate).getForEntity(anyString(), any());
-        verify(rateMapper, never()).dtoToCurrency(any());
+        verify(exchangeRatePopulator, never()).populateDataToEntity(any(ExchangeRateDto.class), any(ExchangeRate.class));
         verify(rateRepository, never()).saveAll(anyIterable());
     }
 
@@ -96,7 +96,7 @@ class CurrencyServiceTest {
         service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
-        verify(rateMapper, never()).dtoToCurrency(any(ExchangeRateDto.class));
+        verify(exchangeRatePopulator, never()).populateDataToEntity(any(ExchangeRateDto.class), any(ExchangeRate.class));
         verify(rateRepository).saveAll(listArg.capture());
         assertTrue(listArg.getValue().isEmpty());
     }
@@ -112,7 +112,7 @@ class CurrencyServiceTest {
         service.updateExchangeRates();
 
         verify(restTemplate).getForEntity(anyString(), any());
-        verify(rateMapper, never()).dtoToCurrency(any(ExchangeRateDto.class));
+        verify(exchangeRatePopulator, never()).populateDataToEntity(any(ExchangeRateDto.class), any(ExchangeRate.class));
         verify(rateRepository).saveAll(listArg.capture());
         assertTrue(listArg.getValue().isEmpty());
     }

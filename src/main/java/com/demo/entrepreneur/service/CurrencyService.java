@@ -4,7 +4,7 @@ import com.demo.entrepreneur.dto.ArchivedRatesDto;
 import com.demo.entrepreneur.dto.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
 import com.demo.entrepreneur.enumeration.Currency;
-import com.demo.entrepreneur.mapping.ExchangeRateMapper;
+import com.demo.entrepreneur.mapping.populator.Populator;
 import com.demo.entrepreneur.repository.ExchangeRateRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +34,14 @@ public class CurrencyService {
     @Value("#{T(java.time.format.DateTimeFormatter).ofPattern('${archive.date.api.format}')}")
     private DateTimeFormatter apiDateFormat;
 
+    private Populator<ExchangeRateDto, ExchangeRate> exchangeRatePopulator;
     private ExchangeRateRepository rateRepository;
-    private ExchangeRateMapper rateMapper;
     private RestTemplate restTemplate;
 
     @Autowired
-    public CurrencyService(ExchangeRateRepository rateRepository, ExchangeRateMapper rateMapper, RestTemplate restTemplate) {
+    public CurrencyService(ExchangeRateRepository rateRepository, Populator<ExchangeRateDto, ExchangeRate> exchangeRatePopulator, RestTemplate restTemplate) {
         this.rateRepository = rateRepository;
-        this.rateMapper = rateMapper;
+        this.exchangeRatePopulator = exchangeRatePopulator;
         this.restTemplate = restTemplate;
     }
 
@@ -49,15 +49,13 @@ public class CurrencyService {
         log.info("Call currency api({}) to update currency.", apiUrl);
 
         ResponseEntity<ExchangeRateDto[]> responseEntity = restTemplate.getForEntity(apiUrl, ExchangeRateDto[].class);
-        log.info("Look here {}", responseEntity.getBody());
+        log.debug("Response body {}", responseEntity.getBody());
         ExchangeRateDto[] rates = responseEntity.getBody();
         List<ExchangeRate> exchangeRates = Stream.of(rates)
                 .filter(this::isExchangeValid)
-                .map(rateMapper::dtoToCurrency)
+                .map(rate -> exchangeRatePopulator.populateDataToEntity(rate, new ExchangeRate()))
                 .collect(Collectors.toList());
-        List<ExchangeRate> saved = rateRepository.saveAll(exchangeRates);
-
-        log.info("Saved rates: {}", saved);
+        rateRepository.saveAll(exchangeRates);
     }
 
     public void loadOldestMissedDateFromArchive() {
@@ -71,11 +69,10 @@ public class CurrencyService {
                     .getExchangeRate().stream()
                     .filter(this::isExchangeValid)
                     .peek(elem -> elem.setDate(lastDate))
-                    .map(rateMapper::dtoToCurrency)
+                    .map(rate -> exchangeRatePopulator.populateDataToEntity(rate, new ExchangeRate()))
                     .collect(Collectors.toList());
 
-            List<ExchangeRate> saved = rateRepository.saveAll(exchangeRatesByDay);
-            log.info("Saved exchangeRate: {}", saved);
+            rateRepository.saveAll(exchangeRatesByDay);
         }
     }
 

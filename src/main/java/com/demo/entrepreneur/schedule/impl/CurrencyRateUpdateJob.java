@@ -4,9 +4,9 @@ import com.demo.entrepreneur.schedule.ScheduledJob;
 import com.demo.entrepreneur.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class CurrencyRateUpdateJob implements ScheduledJob {
 
     private CurrencyService currencyService;
