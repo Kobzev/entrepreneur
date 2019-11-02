@@ -1,9 +1,12 @@
 package com.demo.entrepreneur.service.impl;
 
-import com.demo.entrepreneur.dao.UserRepository;
-import com.demo.entrepreneur.dto.UserDto;
+import com.demo.entrepreneur.exception.UnsupportedEmailException;
+import com.demo.entrepreneur.repository.UserRepository;
+import com.demo.entrepreneur.dto.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
-import com.demo.entrepreneur.mapping.populator.impl.UserPopulator;
+import com.demo.entrepreneur.mapping.populator.impl.RequestUserPopulator;
+import com.demo.entrepreneur.service.EmailSenderService;
+import com.demo.entrepreneur.service.EmailValidatorService;
 import com.demo.entrepreneur.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +19,24 @@ import java.util.Collection;
 public class DefaultUserService implements UserService {
 
     @Autowired
-    private UserPopulator userPopulator;
+    private RequestUserPopulator requestUserPopulator;
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EmailValidatorService emailValidator;
+
+    @Autowired
+    private EmailSenderService emailSender;
+
     @Override
-    public User registerNewUser(UserDto userDto) {
-        final User user = userPopulator.populateDataToEntity(userDto, new User());
+    public User registerNewUser(RequestUserDto requestUserDto) {
+        if (!emailValidator.isValid(requestUserDto.getEmail())) {
+            throw new UnsupportedEmailException("User email is not valid");
+        }
+        final User user = requestUserPopulator.populateDataToEntity(requestUserDto, new User());
+        emailSender.sendVerificationEmail(user.getEmail());
         return userRepository.save(user);
     }
 
@@ -39,9 +52,9 @@ public class DefaultUserService implements UserService {
 
     @Transactional
     @Override
-    public User updateUserByLogin(String login, UserDto userDto) {
+    public User updateUserByLogin(String login, RequestUserDto requestUserDto) {
         final User user = getUserByLogin(login);
-        return userPopulator.populateDataToEntity(userDto, user);
+        return requestUserPopulator.populateDataToEntity(requestUserDto, user);
     }
 
     @Override

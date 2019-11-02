@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.dao;
+package com.demo.entrepreneur.repository;
 
 import com.demo.entrepreneur.entity.User;
 import org.springframework.data.repository.RepositoryDefinition;
