@@ -5,7 +5,7 @@ import com.demo.entrepreneur.enumeration.TaxGroup;
 
 import org.springframework.stereotype.Component;
 
-import com.demo.entrepreneur.dto.RequestUserDto;
+import com.demo.entrepreneur.dto.user.RequestUserDto;
 import com.demo.entrepreneur.mapping.populator.Populator;
 
 @Component

@@ -1,9 +1,12 @@
 package com.demo.entrepreneur.service.impl;
 
 import com.demo.entrepreneur.repository.UserRepository;
-import com.demo.entrepreneur.dto.RequestUserDto;
+import com.demo.entrepreneur.dto.user.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
+import com.demo.entrepreneur.exception.UnsupportedEmailException;
 import com.demo.entrepreneur.mapping.populator.impl.RequestUserPopulator;
+import com.demo.entrepreneur.service.EmailSenderService;
+import com.demo.entrepreneur.service.EmailValidatorService;
 import com.demo.entrepreneur.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +22,26 @@ public class DefaultUserService implements UserService {
 
     private UserRepository userRepository;
 
+    private EmailValidatorService emailValidator;
+
+    private EmailSenderService emailSender;
+
     @Autowired
-    private DefaultUserService(RequestUserPopulator requestUserPopulator, UserRepository userRepository) {
+    private DefaultUserService(RequestUserPopulator requestUserPopulator, UserRepository userRepository,
+	    EmailValidatorService emailValidator, EmailSenderService emailSender) {
         this.requestUserPopulator = requestUserPopulator;
         this.userRepository = userRepository;
+        this.emailValidator = emailValidator;
+        this.emailSender = emailSender;
     }
 
     @Override
     public User registerNewUser(RequestUserDto requestUserDto) {
+        if (!emailValidator.isValid(requestUserDto.getEmail())) {
+            throw new UnsupportedEmailException("User email is not valid");
+        }
         final User user = requestUserPopulator.populateDataToEntity(requestUserDto, new User());
+        emailSender.sendVerificationEmail(user.getEmail());
         return userRepository.save(user);
     }
 

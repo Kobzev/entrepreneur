@@ -1,6 +1,5 @@
-package com.demo.entrepreneur.dto;
+package com.demo.entrepreneur.dto.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,23 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class RequestUserDto {
+public class ResponseUserDto {
 
-    @Schema(description = "user login", required = true)
-    @JsonProperty("login")
+    @Schema(description = "user login", accessMode = AccessMode.READ_ONLY)
+    @JsonProperty(value = "login", required = true)
     private String login;
-
-    @Schema(description = "user password", accessMode = AccessMode.WRITE_ONLY)
-    @JsonProperty(value = "password", required = true)
-    private String password;
-
     @JsonProperty(value = "email", required = true)
     private String email;
-
     @JsonProperty(value = "firstName", required = false)
     private String firstName;
-
     @JsonProperty(value = "lastName", required = false)
     private String lastName;
 

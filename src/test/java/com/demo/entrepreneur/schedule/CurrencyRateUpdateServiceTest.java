@@ -1,5 +1,6 @@
 package com.demo.entrepreneur.schedule;
 
+import com.demo.entrepreneur.schedule.impl.CurrencyRateUpdateJob;
 import com.demo.entrepreneur.service.CurrencyService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +18,7 @@ class CurrencyRateUpdateServiceTest {
 
     @Test
     void whenScheduleCallUpdateRates() {
-        currencyRateUpdateService.updateRates();
+        currencyRateUpdateService.execute();
 
         verify(currencyService).updateExchangeRates();
     }
