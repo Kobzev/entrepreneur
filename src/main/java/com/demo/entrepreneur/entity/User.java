@@ -38,7 +38,7 @@ public class User {
     private String firstName;
     @Column(name = "lastname")
     private String lastName;
-    @Column(name = "apprx_income_usd", nullable = true)
+    @Column(name = "apprx_income_usd", nullable = false)
     private Integer approximateIncomeInUsd;
     @Column(name = "taxGroup", nullable = false)
     @Enumerated(EnumType.STRING)

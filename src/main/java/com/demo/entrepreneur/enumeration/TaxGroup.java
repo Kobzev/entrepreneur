@@ -1,29 +1,26 @@
 package com.demo.entrepreneur.enumeration;
 
-import java.util.Map;
+import java.util.stream.Stream;
 
-import com.google.common.collect.Maps;
-
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum TaxGroup {
-    GENERAL(0, false), I(1, false), II(2, false), III(3, true), IV(4, false), V(5, true), UNDEFINED(-1, false);
-
-    private TaxGroup(Integer groupNumber, boolean supported) {
-        this.groupNumber = groupNumber;
-        this.supported = supported;
-        Mapping.taxGroupsByGroupNumber.put(groupNumber, this);
-    }
+    GENERAL(0, false),
+    I(1, false),
+    II(2, false),
+    III(3, true),
+    IV(4, false),
+    V(5, true);
 
     private final Integer groupNumber;
     private final boolean supported;
 
     public static TaxGroup valueOfGroupNumber(Integer groupNumber) {
-        return Mapping.taxGroupsByGroupNumber.getOrDefault(groupNumber, UNDEFINED);
-    }
-
-    private interface Mapping {
-        public static final Map<Integer, TaxGroup> taxGroupsByGroupNumber = Maps.newHashMap();
+        return Stream.of(values()).filter(value -> value.getGroupNumber().equals(groupNumber)).findAny().orElseThrow(
+                () -> new RuntimeException(String.format("TaxGroup value for groupNumber %s not found", groupNumber)));
     }
 }

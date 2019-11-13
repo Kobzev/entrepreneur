@@ -25,7 +25,7 @@ public class ResponseUserDto {
     @JsonProperty(value = "lastName", required = false)
     private String lastName;
 
-    @JsonProperty(value = "approximateIncomeInUsd", required = false)
+    @JsonProperty(value = "approximateIncomeInUsd", required = true)
     private Integer approximateIncomeInUsd;
 
     @JsonProperty(value = "taxGroup", required = true)
