@@ -1,7 +1,8 @@
 package com.demo.entrepreneur.mapping.populator.impl;
 
-import com.demo.entrepreneur.entity.TaxGroup;
 import com.demo.entrepreneur.entity.User;
+import com.demo.entrepreneur.enumeration.TaxGroup;
+
 import org.springframework.stereotype.Component;
 
 import com.demo.entrepreneur.dto.RequestUserDto;

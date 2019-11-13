@@ -1,4 +1,4 @@
-package com.demo.entrepreneur.entity;
+package com.demo.entrepreneur.enumeration;
 
 import java.util.Map;
 

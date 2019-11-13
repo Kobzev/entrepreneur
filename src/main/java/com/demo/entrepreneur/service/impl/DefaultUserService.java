@@ -15,11 +15,15 @@ import java.util.Collection;
 @Service
 public class DefaultUserService implements UserService {
 
-    @Autowired
     private RequestUserPopulator requestUserPopulator;
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private DefaultUserService(RequestUserPopulator requestUserPopulator, UserRepository userRepository) {
+        this.requestUserPopulator = requestUserPopulator;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User registerNewUser(RequestUserDto requestUserDto) {
