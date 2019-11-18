@@ -1,9 +1,9 @@
 package com.demo.entrepreneur.service.impl;
 
-import com.demo.entrepreneur.exception.UnsupportedEmailException;
 import com.demo.entrepreneur.repository.UserRepository;
 import com.demo.entrepreneur.dto.user.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
+import com.demo.entrepreneur.exception.UnsupportedEmailException;
 import com.demo.entrepreneur.mapping.populator.impl.RequestUserPopulator;
 import com.demo.entrepreneur.service.EmailSenderService;
 import com.demo.entrepreneur.service.EmailValidatorService;
@@ -18,17 +18,22 @@ import java.util.Collection;
 @Service
 public class DefaultUserService implements UserService {
 
-    @Autowired
     private RequestUserPopulator requestUserPopulator;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private EmailValidatorService emailValidator;
 
-    @Autowired
     private EmailSenderService emailSender;
+
+    @Autowired
+    public DefaultUserService(RequestUserPopulator requestUserPopulator, UserRepository userRepository,
+	    EmailValidatorService emailValidator, EmailSenderService emailSender) {
+        this.requestUserPopulator = requestUserPopulator;
+        this.userRepository = userRepository;
+        this.emailValidator = emailValidator;
+        this.emailSender = emailSender;
+    }
 
     @Override
     public User registerNewUser(RequestUserDto requestUserDto) {
