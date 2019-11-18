@@ -27,7 +27,7 @@ public class DefaultUserService implements UserService {
     private EmailSenderService emailSender;
 
     @Autowired
-    private DefaultUserService(RequestUserPopulator requestUserPopulator, UserRepository userRepository,
+    public DefaultUserService(RequestUserPopulator requestUserPopulator, UserRepository userRepository,
 	    EmailValidatorService emailValidator, EmailSenderService emailSender) {
         this.requestUserPopulator = requestUserPopulator;
         this.userRepository = userRepository;

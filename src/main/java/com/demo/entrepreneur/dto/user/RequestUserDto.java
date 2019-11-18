@@ -28,10 +28,10 @@ public class RequestUserDto {
     @JsonProperty(value = "email", required = true)
     private String email;
 
-    @JsonProperty(value = "firstName", required = false)
+    @JsonProperty(value = "firstName")
     private String firstName;
 
-    @JsonProperty(value = "lastName", required = false)
+    @JsonProperty(value = "lastName")
     private String lastName;
 
     @JsonProperty(value = "approximateIncomeInUsd", required = true)

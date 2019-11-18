@@ -40,7 +40,7 @@ public class User {
     private String lastName;
     @Column(name = "apprx_income_usd", nullable = false)
     private Integer approximateIncomeInUsd;
-    @Column(name = "taxGroup", nullable = false)
+    @Column(name = "tax_group", nullable = false)
     @Enumerated(EnumType.STRING)
     private TaxGroup taxGroup;
 }
