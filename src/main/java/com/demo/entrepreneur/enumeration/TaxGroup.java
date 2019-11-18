@@ -20,7 +20,10 @@ public enum TaxGroup {
     private final boolean supported;
 
     public static TaxGroup valueOfGroupNumber(Integer groupNumber) {
-        return Stream.of(values()).filter(value -> value.getGroupNumber().equals(groupNumber)).findAny().orElseThrow(
-                () -> new RuntimeException(String.format("TaxGroup value for groupNumber %s not found", groupNumber)));
+        return Stream.of(values())// @formatter:off
+                .filter(value -> value.getGroupNumber().equals(groupNumber))
+                .findAny()
+                .orElseThrow(
+                () -> new RuntimeException(String.format("TaxGroup value for groupNumber %s not found", groupNumber)));// @formatter:on
     }
 }
