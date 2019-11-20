@@ -1,6 +1,6 @@
 package com.demo.entrepreneur.mapping.mapper.impl;
 
-import com.demo.entrepreneur.dto.RequestUserDto;
+import com.demo.entrepreneur.dto.user.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
 import com.demo.entrepreneur.mapping.mapper.Mapper;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,9 @@ public class RequestUserMapper implements Mapper<RequestUserDto, User> {
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .login(entity.getLogin())
-                .password(entity.getPassword()).build();// @formatter:on
+                .password(entity.getPassword())
+                .approximateIncomeInUsd(entity.getApproximateIncomeInUsd())
+                .taxGroup(entity.getTaxGroup().getGroupNumber()).build();// @formatter:on
     }
 
 

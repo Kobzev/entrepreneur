@@ -1,5 +1,6 @@
-package com.demo.entrepreneur.dto;
+package com.demo.entrepreneur.dto.currency;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -16,13 +17,13 @@ import java.time.LocalDate;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExchangeRateDto {
 
-    @JsonProperty("ccy")
+    @JsonAlias({"ccy", "currency"})
     private String currentCurrency;
-    @JsonProperty("base_ccy")
+    @JsonAlias({"base_ccy", "baseCurrency"})
     private String baseCurrency;
-    @JsonProperty("buy")
+    @JsonAlias({"buy", "purchaseRate", "purchaseRateNB"})
     private String buyPrice;
-    @JsonProperty("sale")
+    @JsonAlias({"sale", "saleRate", "saleRateNB"})
     private String salePrice;
     @JsonProperty("date")
     @Builder.Default

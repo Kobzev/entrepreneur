@@ -1,7 +1,6 @@
 package com.demo.entrepreneur.mapping.populator.impl;
 
-import com.demo.entrepreneur.dto.ExchangeRateDto;
-
+import com.demo.entrepreneur.dto.currency.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
 import com.demo.entrepreneur.enumeration.Currency;
 import com.demo.entrepreneur.mapping.populator.Populator;
@@ -14,14 +13,11 @@ public class ExchangeRatePopulator implements Populator<ExchangeRateDto, Exchang
 
     @Override
     public ExchangeRate populateDataToEntity(ExchangeRateDto data, ExchangeRate entity) {
-        entity.setCurrentCurrency(Currency.valueOf(data.getCurrentCurrency()));
         entity.setBaseCurrency(Currency.valueOf(data.getBaseCurrency()));
-        entity.setSalePrice(new BigDecimal(data.getSalePrice()));
         entity.setBuyPrice(new BigDecimal(data.getBuyPrice()));
+        entity.setCurrentCurrency(Currency.valueOf(data.getCurrentCurrency()));
         entity.setDate(data.getDate());
+        entity.setSalePrice(new BigDecimal(data.getSalePrice()));
         return entity;
     }
-
-
-
 }
