@@ -20,4 +20,16 @@ public class RequestUserMapper implements Mapper<RequestUserDto, User> {
                 .taxGroup(entity.getTaxGroup().getGroupNumber()).build();// @formatter:on
     }
 
+
+    @Override
+    public User dataToEntity(RequestUserDto data) {
+        return User.builder()
+                .login(data.getLogin())
+                .email(data.getEmail())
+                .firstName(data.getFirstName())
+                .lastName(data.getLastName())
+                .password(data.getPassword()).build();
+    }
+
+
 }

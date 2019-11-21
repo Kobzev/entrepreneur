@@ -21,4 +21,13 @@ public class ResponseUserMapper implements Mapper<ResponseUserDto, User> {
         return data;
     }
 
+    @Override
+    public User dataToEntity(ResponseUserDto data) {
+        return User.builder()
+                .login(data.getLogin())
+                .email(data.getEmail())
+                .firstName(data.getFirstName())
+                .lastName(data.getLastName()).build();
+    }
+
 }
