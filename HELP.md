@@ -24,6 +24,8 @@ The following guides illustrate how to use some features concretely:
 From root folder run:
 docker-compose up -d
 
-cleanup DB:
+stop ENV:
 docker-compose stop
-docker rm entrepreneur_db_1
+
+cleanup DB:
+docker-compose down

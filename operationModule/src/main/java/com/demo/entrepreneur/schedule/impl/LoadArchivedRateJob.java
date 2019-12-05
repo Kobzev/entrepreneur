@@ -1,7 +1,7 @@
 package com.demo.entrepreneur.schedule.impl;
 
-import com.demo.entrepreneur.schedule.ScheduledJob;
 import com.demo.entrepreneur.service.CurrencyService;
+import com.demo.entrepreneur.schedule.ScheduledJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

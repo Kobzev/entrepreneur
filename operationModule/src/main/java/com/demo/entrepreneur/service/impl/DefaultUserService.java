@@ -1,10 +1,10 @@
 package com.demo.entrepreneur.service.impl;
 
-import com.demo.entrepreneur.repository.UserRepository;
 import com.demo.entrepreneur.dto.user.RequestUserDto;
 import com.demo.entrepreneur.entity.User;
 import com.demo.entrepreneur.exception.UnsupportedEmailException;
 import com.demo.entrepreneur.mapping.populator.impl.RequestUserPopulator;
+import com.demo.entrepreneur.repository.UserRepository;
 import com.demo.entrepreneur.service.EmailSenderService;
 import com.demo.entrepreneur.service.EmailValidatorService;
 import com.demo.entrepreneur.service.UserService;

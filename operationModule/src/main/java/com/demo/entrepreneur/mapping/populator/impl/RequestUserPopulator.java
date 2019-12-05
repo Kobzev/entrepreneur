@@ -1,12 +1,11 @@
 package com.demo.entrepreneur.mapping.populator.impl;
 
-import com.demo.entrepreneur.entity.User;
+import com.demo.entrepreneur.dto.user.RequestUserDto;
 import com.demo.entrepreneur.enumeration.TaxGroup;
+import com.demo.entrepreneur.mapping.populator.Populator;
+import com.demo.entrepreneur.entity.User;
 
 import org.springframework.stereotype.Component;
-
-import com.demo.entrepreneur.dto.user.RequestUserDto;
-import com.demo.entrepreneur.mapping.populator.Populator;
 
 @Component
 public class RequestUserPopulator implements Populator<RequestUserDto, User> {

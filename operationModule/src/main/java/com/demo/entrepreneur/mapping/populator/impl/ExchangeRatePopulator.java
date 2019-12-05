@@ -2,8 +2,8 @@ package com.demo.entrepreneur.mapping.populator.impl;
 
 import com.demo.entrepreneur.dto.currency.ExchangeRateDto;
 import com.demo.entrepreneur.entity.ExchangeRate;
-import com.demo.entrepreneur.enumeration.Currency;
 import com.demo.entrepreneur.mapping.populator.Populator;
+import com.demo.entrepreneur.enumeration.Currency;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
