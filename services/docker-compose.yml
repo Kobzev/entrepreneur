@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql/mysql-server:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./tools/docker/mysql/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: 'mailhog'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  app:
+    container_name: currencyService
+    restart: always
+    build: ./modules/currencyModule
+    working_dir: /app
+    volumes:
+      - ./modules/currencyModule:/app
+      - ~/.m2:/root/.m2
+    ports:
+      - "8085:8080"
+    command: mvn clean spring-boot:run
+    depends_on:
+      - mysql
+
+  app:
+    container_name: main_app
+    restart: always
+    build: ./modules/operationModule
+    working_dir: /app
+    volumes:
+      - ./modules/operationModule:/app
+      - ~/.m2:/root/.m2
+    ports:
+      - "8080:8080"
+    command: mvn clean spring-boot:run
+    depends_on:
+      - mysql
+      - mailhog
+
