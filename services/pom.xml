@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.8.RELEASE</version>
+        <version>2.1.9.RELEASE</version>
     </parent>
 
     <groupId>com.demo.entrepreneur</groupId>
@@ -33,6 +33,7 @@
         <mysql.version>8.0.17</mysql.version>
         <springdoc-openapi.version>1.1.47</springdoc-openapi.version>
         <lombok.version>1.18.10</lombok.version>
+        <spring.version>2.1.9.RELEASE</spring.version>
     </properties>
 
     <dependencyManagement>
@@ -41,17 +42,17 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>2.1.8.RELEASE</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>2.1.8.RELEASE</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>2.1.8.RELEASE</version>
+                <version>${spring.version}</version>
             </dependency>
 
             <!--DB-->
@@ -77,7 +78,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-devtools</artifactId>
-                <version>2.1.8.RELEASE</version>
+                <version>${spring.version}</version>
                 <scope>runtime</scope>
                 <optional>true</optional>
             </dependency>
@@ -97,7 +98,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
-                <version>2.1.8.RELEASE</version>
+                <version>${spring.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.mockito</groupId>
