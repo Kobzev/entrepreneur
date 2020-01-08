@@ -1,6 +1,72 @@
 version: '3'
 
 services:
+  discovery-server:
+    container_name: discovery-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/data
+    ports:
+      - "8762:8762"
+    command:  java -jar /data/EurekaNamingServer/target/eureka-naming-server-0.0.1-SNAPSHOT.jar
+
+  config-server:
+    container_name: config-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/data
+    ports:
+      - "8888:8888"
+    depends_on:
+      - discovery-server
+    command:  sh -c "/data/tools/docker/wait-for-it.sh -s -t 30 discovery-server:8762 -- java -jar /data/SpringCloudConfigurationServer/target/spring-cloud-config-server-0.0.1-SNAPSHOT.jar"
+
+  currency-scheduling-service:
+    container_name: currency-scheduling-service1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      - discovery-server
+      - config-server
+    command: sh -c "/data/tools/docker/wait-for-it.sh -s -t 60 config-server:8888 -- java -jar /data/CurrencySchedulingService/target/currency-scheduling-service-0.0.1-SNAPSHOT.jar"
+
+  currency-scheduling-service2:
+    container_name: currency-scheduling-service2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/data
+    ports:
+      - "8001:8001"
+    depends_on:
+      - discovery-server
+      - config-server
+    command: sh -c "/data/tools/docker/wait-for-it.sh -s -t 60 config-server:8888 -- java -jar -Dserver.port=8001 /data/CurrencySchedulingService/target/currency-scheduling-service-0.0.1-SNAPSHOT.jar"
+
+  currency-scheduling-service3:
+    container_name: currency-scheduling-service3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/data
+    ports:
+      - "8002:8002"
+    depends_on:
+      - discovery-server
+      - config-server
+    command: sh -c "/data/tools/docker/wait-for-it.sh -s -t 60 config-server:8888 -- java -jar -Dserver.port=8002 /data/CurrencySchedulingService/target/currency-scheduling-service-0.0.1-SNAPSHOT.jar"
+
   mysql:
     container_name: mysql
     image: mysql/mysql-server:5.7
@@ -18,27 +84,28 @@ services:
       - "1025:1025"
       - "8025:8025"
 
-  currency_app:
-    container_name: currencyService
-    restart: always
-    build: ./modules/currencyModule
-    working_dir: /app
+  currency-exchange-service:
+    container_name: currency-exchange-service
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - ./modules/currencyModule:/app
-      - ~/.m2:/root/.m2
+      - ./:/data
     ports:
-      - "8085:8080"
-    command: mvn clean spring-boot:run
+      - "8200:8200"
     depends_on:
+      - discovery-server
+      - config-server
       - mysql
+    command: sh -c "/data/tools/docker/wait-for-it.sh -s -t 60 config-server:8888 -- java -jar /data/CurrencyExchangeService/target/currency-exchange-service-0.0.1-SNAPSHOT.jar"
 
   main_app:
     container_name: main_app
     restart: always
-    build: ./modules/operationModule
+    build: ./UserService
     working_dir: /app
     volumes:
-      - ./modules/operationModule:/app
+      - ./UserService:/app
       - ~/.m2:/root/.m2
     ports:
       - "8080:8080"

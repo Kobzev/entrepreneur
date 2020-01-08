@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.9.RELEASE</version>
+        <version>2.2.2.RELEASE</version>
     </parent>
 
     <groupId>com.demo.entrepreneur</groupId>
@@ -18,9 +18,12 @@
     <description>Entrepreneur backend services</description>
 
     <modules>
-        <module>modules/currencyModule</module>
-        <module>modules/currencyClient</module>
-        <module>modules/operationModule</module>
+        <module>EurekaNamingServer</module>
+        <module>SpringCloudConfigurationServer</module>
+        <module>CurrencyExchangeService</module>
+        <module>CurrencySchedulingService</module>
+        <module>UserService</module>
+        <module>currencyClient</module>
     </modules>
 
     <properties>
@@ -33,26 +36,35 @@
         <mysql.version>8.0.17</mysql.version>
         <springdoc-openapi.version>1.1.47</springdoc-openapi.version>
         <lombok.version>1.18.10</lombok.version>
-        <spring.version>2.1.9.RELEASE</spring.version>
+        <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
+        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!--Spring Cloud-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!--Spring-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring.version}</version>
+                <version>${spring.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${spring.version}</version>
+                <version>${spring.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>${spring.version}</version>
+                <version>${spring.boot.version}</version>
             </dependency>
 
             <!--DB-->
@@ -78,7 +90,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-devtools</artifactId>
-                <version>${spring.version}</version>
+                <version>${spring.boot.version}</version>
                 <scope>runtime</scope>
                 <optional>true</optional>
             </dependency>
@@ -98,7 +110,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring.version}</version>
+                <version>${spring.boot.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.mockito</groupId>
@@ -145,7 +157,7 @@
     </dependencyManagement>
 
     <build>
-<!--        <pluginManagement>-->
+        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
@@ -203,6 +215,6 @@
                     </executions>
                 </plugin>
             </plugins>
-<!--        </pluginManagement>-->
+        </pluginManagement>
     </build>
 </project>

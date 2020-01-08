@@ -25,6 +25,8 @@ http://localhost:8080/swagger-ui.html
 
 # How to run local DB
 From root folder run:
+mvn clean install
+docker-compose build
 docker-compose up -d
 
 stop ENV:
@@ -33,6 +35,8 @@ docker-compose stop
 cleanup containers:
 docker-compose down --remove-orphans
 docker rm $CONTAINER_name
+
+docker image rm services_config-server
 
 list of images
 docker image ls
