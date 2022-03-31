@@ -33,7 +33,7 @@
         <mysql.version>8.0.17</mysql.version>
         <springdoc-openapi.version>1.1.47</springdoc-openapi.version>
         <lombok.version>1.18.10</lombok.version>
-        <spring.version>2.1.9.RELEASE</spring.version>
+        <spring.version>2.5.12</spring.version>
     </properties>
 
     <dependencyManagement>
